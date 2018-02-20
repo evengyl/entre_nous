@@ -22,6 +22,7 @@
 
 <!-- add editor test -->
 <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-<script src="https://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+<script src="/js/hotkey_wysiwyg_jquery.js"></script>
 <script src="/js/bootstrap-wysiwyg.min.js"></script>
+<script src="/js/editing_direct.js"></script>
 <!-- stop add -->
