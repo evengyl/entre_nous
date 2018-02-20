@@ -12,7 +12,7 @@ class Autoloader
        switch($class)
        {
             case "_db_connect":
-                require($base_dir."/app/modele/".$class.".class.php");
+                require("Evengyl/modele/".$class.".class.php");
                 break;
 
             case "all_query":
@@ -22,12 +22,12 @@ class Autoloader
             case "parse_sql":
             case "orm":
             case "modele_sql":
-                require($base_dir."/app/core/sql_core/".$class.".php");
+                require("Evengyl/core/".$class.".php");
                 break;
 
             case strpos($class, "model_") !== false:
-                if(file_exists($base_dir."/app/core/sql_core/modele_object/".$class.".php"))
-                    require($base_dir."/app/core/sql_core/modele_object/".$class.".php");
+                if(file_exists($base_dir."/app/core/modele_object/".$class.".php"))
+                    require($base_dir."/app/core/modele_object/".$class.".php");
                 break;
 
             case "router":

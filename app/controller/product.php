@@ -35,8 +35,8 @@ Class product extends base_module
 
 			$req_product_caract = new stdClass();
 			$req_product_caract->table = "ma_ft_product_caract";
-			$req_product_caract->var = "ma_ft_product_caract.id AS id_line_caract, ma_ft_product_caract_name.id AS id_name, ma_ft_product_caract_value.id AS id_value, ma_ft_product_caract_value.value";
-			$req_product_caract->var_translate = "ma_ft_product_caract_name.name";
+			$req_product_caract->var = "ma_ft_product_caract.id AS id_line_caract, ma_ft_product_caract_name.id AS id_name, ma_ft_product_caract_value.id AS id_value";
+			$req_product_caract->var_translate = "ma_ft_product_caract_value.value, ma_ft_product_caract_name.name";
 			$req_product_caract->join = ["ma_ft_product_caract_name", "ma_ft_product_caract_value"];
 			$req_product_caract->on = ["ma_ft_product_caract_name.id = ma_ft_product_caract.id_caract_name", "ma_ft_product_caract_value.id = ma_ft_product_caract.id_caract_value"];
 			$req_product_caract->where = ["id_product" => $product_id];

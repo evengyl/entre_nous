@@ -3,14 +3,14 @@ $base_dir = dirname(dirname(dirname(__FILE__)));
 $_app = new stdClass();
 
 
-require_once $base_dir."/app/core/tools.php";
+require_once $base_dir."/app/includes/tools.php";
 
 require_once $base_dir."/app/modele/Config.php";
 Config::set_config_base();
 
 
 //Chargement de class concernée pour le sql
-require_once $base_dir.'/app/core/load_class.php'; 
+require_once $base_dir."/app/includes/load_class.php"; 
 
 //start du execute time page , attention option dois être activée dans la config
 start_exec_page_timer();
