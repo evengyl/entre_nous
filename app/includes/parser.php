@@ -42,10 +42,33 @@ class parser
 	{
 		$tpl_name = preg_replace(array("/__TPL[0-9]*_/", "/__/"), "", $match_template);
 
+		
+
 		if(strpos($tpl_name, "admin_") !== false)
-			$path_template= '../vues/admin_tool/'.$tpl_name.'.php';
+		{
+			if(file_exists('../vues/admin_tool/'.$tpl_name.'.php')){
+				//ok vues privée
+				$path_template= '../vues/admin_tool/'.$tpl_name.'.php';
+			}
+			else{
+				//ok vues public
+				$path_template= '../vues_public/admin_tool/'.$tpl_name.'.php';
+			}
+			
+		}
+			
 		else
-			$path_template = '../vues/'.$tpl_name.'.php';
+		{
+			if(file_exists('../vues/'.$tpl_name.'.php')){
+				//ok vues privée
+				$path_template= '../vues/'.$tpl_name.'.php';
+			}
+			else{
+				//ok vues public
+				$path_template= '../vues_public/'.$tpl_name.'.php';
+			}
+		}
+			
 		
 		return $this->exec_tpl($match_template, $page, $path_template, $tpl_name);
 	}

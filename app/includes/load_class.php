@@ -45,7 +45,10 @@ class Autoloader
                 break;
 
             default:
-                require($base_dir."/app/controller/".$class.'.php');
-       }
+                if(file_exists($base_dir."/app/controller/".$class.'.php'))
+                    require($base_dir."/app/controller/".$class.'.php');
+                else
+                    require($base_dir."/app/controller_public/".$class.'.php');
+       }        
     }
 }?>

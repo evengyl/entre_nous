@@ -9,7 +9,7 @@
             <p><img src="/images/welle_ft_logo.PNG"></p>
         </a><?
         if(isset($general->title)){
-            ?><h2><b class="col-xs-12" data-action="edit" data-table="specific_text_categ"  data-column="title_<?= $_SESSION['lang']; ?>" data-id-text="<?= $general->id; ?>">&nbsp;<?= $general->title; ?></b></h2><?
+            ?><h2><b class="col-xs-12" data-action="edit_simple_lang" data-global="specific_text_categ.title.<?= $general->id; ?>">&nbsp;<?= $general->title; ?></b></h2><?
         }?>
                 
 </div>

@@ -18,10 +18,6 @@ Class base_module
 		$this->_app = &$_app;
 
 //ancienement
-		if($this->_app->sql != "")
-			$this->sql = $this->_app->sql;
-		else
-			$this->sql = new all_query();
 
 //pour le new orm
 		if($this->_app->orm != "")
@@ -29,15 +25,6 @@ Class base_module
 		else
 			$this->orm = new orm();
 
-
-
-		if(Config::$is_connect)
-		{
-			if(!isset($this->_app->user) || !empty($this->_app->user))
-				$this->user = singleton::get_singleton()->user;
-			else
-				$this->user = $this->_app->user;
-		}
 
 		$this->module_name = $this->_app->module_name;
 	}
@@ -87,9 +74,29 @@ Class base_module
 			$this->template_name = $this->module_name;
 
 		if(strpos($this->template_name, "admin_") !== false)
-			$this->template_path = "../vues/admin_tool/".$this->template_name.".php";
+		{
+			if(file_exists('../vues/admin_tool/'.$this->template_name.'.php')){
+				//ok vues privée
+				$this->template_path= '../vues/admin_tool/'.$this->template_name.'.php';
+			}
+			else{
+				//ok vues public
+				$this->template_path= '../vues_public/admin_tool/'.$this->template_name.'.php';
+			}
+			
+		}
+			
 		else
-			$this->template_path = "../vues/".$this->template_name.".php";
+		{
+			if(file_exists('../vues/'.$this->template_name.'.php')){
+				//ok vues privée
+				$this->template_path= '../vues/'.$this->template_name.'.php';
+			}
+			else{
+				//ok vues public
+				$this->template_path= '../vues_public/'.$this->template_name.'.php';
+			}
+		}
 
 	}
 

@@ -12,11 +12,19 @@ $(document).ready(function()
     var icon_pencil = '<div class="col-xxs-12 block_icon_translate"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="fa fa-language"></span></div>';
     $("[data-action='edit_simple_lang']").after(icon_pencil);
 
+    $("[data-action='edit_simple_lang']").on('dblclick', function()
+    {
+        //part test avec info general rassemblée en un data
+        var data_global = $(this).attr("data-global");
+        var edit_product_way = "/includes_public/fct_standard_for_ajax.php";
+        fct_edit_translate($(this), data_global, edit_product_way);
+    });
+
 });
 
 
 //part editing translating words and sentences
-function fct_edit_translate(obj_this, data_global, block_to_reload, way_controller)
+function fct_edit_translate(obj_this, data_global, way_controller)
 {
 
     //travail sur le data global

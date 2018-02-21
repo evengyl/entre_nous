@@ -3,8 +3,13 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 {?>
 	<div class="col-xs-12 col-without-padding connect-form">		
 		<p class="bg-success">Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?>, <a href="?page=logout">Se déconnecter</a></p>
-	</div>
-	<?
+	</div><?
+	if(isset($_SESSION['referer']))
+	{?>
+		<div class="col-xs-12 col-without-padding connect-form">		
+			<p class="bg-success"><a style="cursor: pointer;" href='<?= $_SESSION["referer"]; ?>'>Reprendre la ou vous en étiez</a></p>
+		</div><?
+	}
 }
 else
 {?>
@@ -27,9 +32,11 @@ else
 			
 			<button type="submit" class="col-xs-12 btn btn-default">Connexion</button>
 			<div class="col-xs-12">Si vous avez oubliez votre mot de passer c'est ici : <a style="cursor: pointer;" data-toggle="modal" data-target="#lost_login_modal">Récupérer son mot de passe</a></div>
+
 			
 		</form>
 	</div><?
+	$_SESSION['referer'] = $_SERVER['HTTP_REFERER'];
 	unset($_SESSION['error']); // permet de ne pas afficher les erreurs de connection si on reload la page
 }
 
