@@ -16,7 +16,7 @@ $(document).ready(function()
     {
         //part test avec info general rassemblée en un data
         var data_global = $(this).attr("data-global");
-        var edit_product_way = "/includes_public/fct_standard_for_ajax.php";
+        var edit_product_way = "/includes_public/translate_inline_ajax.php";
         fct_edit_translate($(this), data_global, edit_product_way);
     });
 
