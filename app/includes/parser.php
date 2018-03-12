@@ -19,20 +19,21 @@ class parser
 			if(preg_match('/__TPL_[a-z0-9_]+__/', $page, $match))
 				$page = $this->parse_template($match[0], $page);
 
-			else if(preg_match('/__MOD_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match)) //old regex __MOD_[a-z_]+[(\"]*[a-zA-Z0-9_éèçàê= \']*[\")]*__
-				$page = $this->parse_module($match[0], $page);
-				
+			else if(preg_match('/(?!<!--)__MOD_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__(?!-->)/', $page, $match)) //old regex __MOD_[a-z_]+[(\"]*[a-zA-Z0-9_éèçàê= \']*[\")]*__
+					$page = $this->parse_module($match[0], $page);	
 			else
 			{
 				if(preg_match('/__TPL2_[a-z0-9_]+__/', $page, $match))
 					$page = $this->parse_template($match[0], $page);
 
-				else if(preg_match('/__MOD2_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match)) //old regex __MOD2_[a-z_]+[(\"]*[a-zA-Z0-9_éèçàê= \']*[\")]*__
+				else if(preg_match('/(?!<!--)__MOD2_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__(?!-->)/', $page, $match)) //old regex __MOD2_[a-z_]+[(\"]*[a-zA-Z0-9_éèçàê= \']*[\")]*__
 					$page = $this->parse_module($match[0], $page);
+				else
+					$_SESSION['error'] = "The $page contain no Module or Template tag";		
 			}
 		}
 		else
-			$_SESSION['error'] = "Il y a un problème dans le parser Parser_main() la page n'est pas arrivée au parseur";
+			$_SESSION['error'] = "Problem on Parser_main() parser function, not $page receive";
 		
 		return $page;
 	}

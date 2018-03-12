@@ -11,4 +11,4 @@
 	<p style="padding-left:15px;">__TRANS_explain_weller_ft__</p>
 
 </div>
-__MOD2_documentations(["breadcrumb"=> "no"])__
+<!--__MOD2_documentations(["breadcrumb"=> "no"])__-->

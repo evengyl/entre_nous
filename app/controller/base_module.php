@@ -52,7 +52,6 @@ Class base_module
 				extract($this->var_to_extract);
 
 			$this->set_template_path();	
-
 			require($this->template_path);
 
 			$get_html_tpl = ob_get_contents();
@@ -94,7 +93,7 @@ Class base_module
 			}
 			else{
 				//ok vues public
-				$this->template_path= '../vues_public/'.$this->template_name.'.php';
+				$this->template_path= '../vues/vues_public/'.$this->template_name.'.php';
 			}
 		}
 
