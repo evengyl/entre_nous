@@ -1,15 +1,16 @@
 <?
 Class router
 {
-	public $route;
+	public $_app;
 
 	public function __construct($route, &$_app)
 	{
-		$this->route = $_app->route = $route;
+		$this->_app = $_app;
+		$this->_app->route = $route;
 
-		if(isset($this->route['page']))
+		if(isset($this->_app->route['page']))
 		{
-			switch($this->route['page'])
+			switch($this->_app->route['page'])
 			{
 				case 'home':
 					$this->assign_mod('home');
@@ -28,9 +29,6 @@ Class router
 		 			break;
 
 				case 'logout':
-					if(!Config::$need_sys_connection)
-							$this->assign_mod('logout');
-					else
 	 					logout($_app->base_dir);
 		 			break;
 
@@ -68,18 +66,21 @@ Class router
 					break;
 				
 				case 'categ':
-					if(isset($this->route['categ_id']))
+					if(isset($this->_app->route['categ_id']))
 						$this->assign_mod('categories');
 					break;
 
 				case 'product':
-					if(isset($this->route['product_id']))
+					if(isset($this->_app->route['product_id']))
 						$this->assign_mod('product');
+					break;
+				case 'reservation':
+						$this->assign_mod('reservation');
 					break;
 
 				default:
 					$this->assign_mod('error', '', '404');
-					unset($this->route['page']);
+					unset($this->_app->route['page']);
 			}	
 		}
 	}
@@ -87,14 +88,14 @@ Class router
 	
 	protected function is_connect()
 	{
-		if(Config::$need_sys_connection)
+		if($this->_app->option_app['app_with_login_option'])
 		{
 			if(Config::$is_connect == 1)
 				return $this;
 			else
 			{
 				//permet de retourner sur la page login quand une page non permise est demandée
-				$this->route['page'] = 'security';
+				$this->_app->route['page'] = 'security';
 				return $this;
 			}	
 		}
@@ -108,7 +109,7 @@ Class router
 
 	protected function assign_mod($specific_module = false, $module_secondaire = false, $var_module = false, $tpl = false)
 	{
-		if(Config::$need_sys_connection == 'false')
+		if(!$this->_app->option_app['app_with_login_option'])
 		{
 			//si pas de sys de connection alors les appel des page en direct commet avec assign mod, doivent renvoyée comme is_connect, vers home
 			if($specific_module == "security" || $specific_module == "admin")

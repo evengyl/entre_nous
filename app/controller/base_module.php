@@ -12,20 +12,11 @@ Class base_module
 	public $module_name;
 	public $sql;
 	public $_app;
+	public $module_name_secondary;
 
 	public function __construct(&$_app)
 	{
 		$this->_app = &$_app;
-
-//ancienement
-
-//pour le new orm
-		if($this->_app->orm != "")
-			$this->orm = $this->_app->orm;
-		else
-			$this->orm = new orm();
-
-
 		$this->module_name = $this->_app->module_name;
 	}
 
@@ -50,11 +41,17 @@ Class base_module
 		ob_start();
 			if(!empty($this->var_to_extract))
 				extract($this->var_to_extract);
+			
+
 
 			$this->set_template_path();	
 			require($this->template_path);
 
 			$get_html_tpl = ob_get_contents();
+			
+			if(!empty($this->module_name_secondary))
+				$get_html_tpl = "__MOD_".$this->module_name_secondary."__";
+			
 		ob_end_clean();
 		return $get_html_tpl;
 	}
@@ -64,6 +61,12 @@ Class base_module
 		$this->template_name = $template_name;
 		$this->set_template_path();
 			
+		return $this;
+	}
+
+	public function use_module($module_name_secondary = "")
+	{
+		$this->module_name_secondary = $module_name_secondary;
 		return $this;
 	}
 

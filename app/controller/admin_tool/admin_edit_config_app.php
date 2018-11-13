@@ -2,35 +2,55 @@
 
 Class admin_edit_config_app extends base_module
 {
+	public $list_option;
 
 	public function __construct(&$_app)
 	{		
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Modification des option de base de l'application", "edit_config_app");
 
-		//on recup le contenu sous forme d'objet du jason config
-		$_get_config = Config::get_config_base();
+		$sql = new stdClass();
+		$sql->table = "option_app";
+		$sql->ctx = new stdClass();
+		$sql->ctx->var = "*";
+		$sql->where = "1";
+		$this->list_option = $_app->sql->select($sql);
 
-		//operation de modification du JSON recu
-		if(isset($_POST['form__config']) && $_POST['form__config'] == 71414242)
+
+		if(isset($_POST["form__config"]))
+			$this->set_config_app($_POST);
+
+		$this->get_html_tpl = $this->assign_var("list_option", $this->list_option)->use_template()->render_tpl();
+	}
+
+	private function set_config_app($post)
+	{
+		unset($post['form__config']);
+
+		foreach($this->list_option as $key => $row_option)
 		{
-			unset($_POST['form__config']);
-
-			foreach($_POST as $key_post => $row_post)
+			if(!isset($post[$row_option->id]))
 			{
-				if(empty($row_post))
-					unset($_POST[$key_post]);
+				$post[$row_option->id] = 0;
+				$this->list_option[$key]->value = 0;
 			}
-
-			$_new_config = array_merge((array)$_get_config, $_POST);
-
-			if(Config::push_config_base($_new_config))
-				$_get_config = Config::get_config_base();
 			else
-				return $_SESSION['error'] = "Attention erreur avec le formulaire de configuration";
+				$this->list_option[$key]->value = 1;	
 		}
-		
-		$this->get_html_tpl = $this->assign_var('_config', $_get_config)->use_template()->render_tpl();
+
+
+		foreach($post as $key => $value)
+		{
+			$sql = new stdClass();
+			$sql->table = "option_app";
+			$sql->ctx = new stdClass();
+			$sql->ctx->value = $value;
+			$sql->where = "id = ".$key;
+
+			$this->_app->sql->update($sql);
+		}
+
 	}
 
     

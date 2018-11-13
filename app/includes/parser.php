@@ -5,11 +5,9 @@ class parser
 	private $rendu_module = "";
 	private $stack_mod_tpl = "";
 	public $_app;
-	public $_view_tpl_in_source_code;
 
 	public function __construct(&$_app)
 	{
-		$this->_view_tpl_in_source_code = (Config::$view_tpl_in_source_code == 1)? 1 : 0;
 		$this->_app = &$_app;
 	}
 	public function parser_main($page)
@@ -28,13 +26,12 @@ class parser
 
 				else if(preg_match('/(?!<!--)__MOD2_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__(?!-->)/', $page, $match)) //old regex __MOD2_[a-z_]+[(\"]*[a-zA-Z0-9_éèçàê= \']*[\")]*__
 					$page = $this->parse_module($match[0], $page);
-				else
-					$_SESSION['error'] = "The $page contain no Module or Template tag";		
 			}
 		}
 		else
-			$_SESSION['error'] = "Problem on Parser_main() parser function, not $page receive";
+			$_SESSION['error'] = "Problem on Parser_main() parser function, not var page receive";
 		
+
 		return $page;
 	}
 
@@ -100,7 +97,7 @@ class parser
 				require_once($path_template);
 			$tpl_content = ob_get_clean();
 
-			if($this->_view_tpl_in_source_code == 1)
+			if($this->_app->option_app['view_tpl_name_in_source_code'] == '1')
 				$tpl_content = "<!-- Début Template : ".$tpl_name."-->".$tpl_content."<!-- Fin Template : ".$tpl_name."-->";
 		}
 		else
@@ -145,7 +142,7 @@ class parser
 
 			$rendu_module =  $module->get_html_tpl;
 
-			if($this->_view_tpl_in_source_code == 1)
+			if($this->_app->option_app['view_tpl_name_in_source_code'] == '1')
 				$rendu_module = "<!-- Début module : ".$module_name."-->".$rendu_module."<!-- Fin module : ".$module_name."-->";
 		}
 		else
@@ -157,32 +154,6 @@ class parser
 		$page = str_replace($match_module, $rendu_module, $page);
 
 		return $this->parser_main($page);
-	}
-
-	public function parser_translate($page)
-	{
-		return preg_replace_callback("/__TRANS_([a-zA-Z0-9_éèçàê]*)__/", array($this, "CallBack_translate_repalce"), $page);
-	}
-
-	public function CallBack_translate_repalce($matches)
-	{
-		if(array_key_exists($matches[0], $this->_app->translate))
-		{
-			if(empty($this->_app->translate[$matches[0]]->name))
-				return "<a style='color:yellow; font-size:25px;'>".str_replace("_", " ", $matches[1])." (DOIT ETRE TRADUIT)</a>";	
-			else
-				return $this->_app->translate[$matches[0]]->name;	
-		}
-		else
-		{
-			$add_translate = new stdClass();
-			$add_translate->table = "translate";
-			$add_translate->ctx = new stdClass();
-			$add_translate->ctx->name_code = $matches[0];
-			$this->_app->sql->insert_into($add_translate);
-			return "<a style='color:red; font-size:25px;'>".str_replace("_", " ", $matches[1])." (DOIT ETRE AJOUTE)</a>";
-		}
-		
 	}
 }
 ?>

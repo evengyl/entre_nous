@@ -1,87 +1,74 @@
-<div class="col-xs-12 footer">
-	<div class="container">
+<footer id="footer" class="top-space">
+	<div class="footer1">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-lg-4 widget">
+					<h3 class="widget-title">__TRANS__contact_detail__</h3>
+					<div class="widget-body">
+						<p>
+							<a href="mailto:perroquet484@matedex.be">perroquet484@gmail.com</a><br>
+							<br>
+							<b>__TRANS_address_title__ : </b>Bungalow numéro 484,<br> Camping Perroquet<br>
+							<b>Rue des dunes à 59123 Bray-Dunes</b><br><br>
+							<b>__TRANS_tel__ : </b> +32 (0)497 31 25 23<br>
+							<b>__TRANS_tel_1__ : </b> +32 (0)468 36 17 82<br>
+						</p>	
+						<!--
+						<div class="hidden-xs col-sm-2" id="" style="color:white;">
+							<?=($_SESSION['lang'] == 'fr')?'':'<a class="col-lg-2" href="'.$_SERVER["REQUEST_URI"].'&lang=fr"><img class="img-responsive" style="height:25px;" src ="/images/fr.png"></a>'; ?>
+							<?=($_SESSION['lang'] == 'en')?'':'<a class="col-lg-2" href="'.$_SERVER["REQUEST_URI"].'&lang=en"><img class="img-responsive" style="height:25px;" src ="/images/en.png"></a>'; ?>
+							<?=($_SESSION['lang'] == 'nl')?'':'<a class="col-lg-2" href="'.$_SERVER["REQUEST_URI"].'&lang=nl"><img class="img-responsive" style="height:25px;" src ="/images/nl.png"></a>'; ?>
+						</div>-->
+					</div>
+				</div>
 
-	    <div class="col-xs-4"><!-- widgets column left -->
-	        <ul class="list-unstyled clear-margins"><!-- widgets -->
-	        	<li class="widget-container widget_nav_menu"><!-- widgets list -->
-	                <h2 class="title-widget">__TRANS_how_to_choise_your_extract__</h2>
-	                <ul>
-						<li><a href="#">Why use a Fume Extraction ?</a></li>
-	                    <li><a href="#">Volume Fume Extraction Selection Guide</a></li>
-	                    <li><a href="#">Understand Spare Filter</a></li>
-	                    <li><a href="#">Which Filter for which Extractor ?</a></li>
-	                </ul>
-				</li>
-				<li class="widget-container widget_nav_menu"><!-- widgets list -->
-	                <h2 class="title-widget">__TRANS_autre__</h2>
-	                <ul>
-	                	<li><a href="#">Tools Guide Selector</a></li>
-						<li><a href="?page=documentations">__TRANS_documentations__</a></li>
-	                    <li><a href="?page=contact">__TRANS_contact_us__</a></li>
-	                    <li><a href="?page=find_us">__TRANS_ou_nous_trouver__</a></li>
-	                    <li><a href="https://www.matedex.be" target="_blank">Matedex Electronic Tools - Website</a></li>
-	                </ul>
-				</li>
-	        </ul>
-	    </div><!-- widgets column left end -->
-	                
-	    <div class="col-xs-4"><!-- widgets column left -->
-	        <ul class="list-unstyled clear-margins"><!-- widgets -->
-	        	<li class="widget-container widget_nav_menu"><!-- widgets list -->
-	                <h2 class="title-widget">__TRANS_categories__</h2>
-	                <ul>
-	                	<?
-		                foreach($nav_top as $key => $nav_top_row)
-		                {
-		                    if(isset($nav_top[$key-1]) && ($nav_top[$key-1]->sub_categ == "2" && $nav_top[$key]->sub_categ != "2"))
-		                        echo "</ul></li>";
+				<div class="col-lg-3 widget">
+					<h3 class="widget-title">Suivez-nous sur facebook</h3>
+					<div class="widget-body">
+						<p class="follow-me-icons">
+							<a href=""><i class="fa fa-facebook fa-2"></i></a>
+						</p>	
+					</div>
+				</div>
 
-		                    if($nav_top_row->sub_categ == "0")
-		                        echo '<li><a href="?page=categ&categ_id='.$nav_top_row->id.'">'.$nav_top_row->name_code.'</a></li>';
+				<div class="col-lg-5 widget">
+					<h3 class="widget-title">ici texte description</h3>
+					<div class="widget-body">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
+						<p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+					</div>
+				</div>
 
-		                    else if($nav_top_row->sub_categ == "1")
-		                    {?>
-		                        <li>
-		                            <a href="?page=categ&categ_id=<?= $nav_top_row->id; ?>"><?= $nav_top_row->name_code; ?></a>
-		                            <ul><?
-		                    }
-
-		                    else if($nav_top_row->sub_categ == "2")
-		                    {?>
-		                        <li><a href="?page=categ&categ_id=<?= $nav_top_row->id; ?>">&nbsp;&nbsp;&nbsp;&nbsp;- <?= $nav_top_row->name_code; ?></a></li><?
-		                    }
-
-
-		                    if(!isset($nav_top[$key+1]))
-		                        echo "</ul></li>";
-
-		                }?>
-	                </ul>
-				</li>
-	        </ul>
-		</div><!-- widgets column left end -->
-
-	                
-	    <div class="col-xs-4"><!-- widgets column center -->
-	        <ul class="list-unstyled clear-margins"><!-- widgets -->
-	        	<li class="widget-container widget_recent_news"><!-- widgets list -->
-	                <h2 class="title-widget">__TRANS__contact_detail__</h2>
-	                <div class="footerp"> 
-	                    <h2 class="title-median">Matedex S.A</h2>
-	                    <p><b>Email : </b><a href="mailto:matedex@matedex.be">Matedex@matedex.be</a></p>
-	                    <p><b>__TRANS_horaire__ : </b><b style="color:#9FC418;">__TRANS_horaire_list__</b></p>
-					    <p><b>__TRANS_address_title__ : </b>4 Avenue de l'artisanat, 1420 Braine-l'Alleud, Belgique</p>
-						<p><b>__TRANS_tel__ : </b> +32 (0)2 387 03 00</p>
-						<p><b>Fax : </b>  +32 (0)2 387 03 66</p>
-	                </div>
-	    		</li>
-	        </ul>
-	    </div>
-
-		<div class="footer-bottom">
-			<div class="col-xs-12" style="text-align:center;">
-				<p>© Matedex S.A. 1949-<?php echo date('Y'); ?> __TRANS_footer_price__.</p>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<div class="footer2">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-lg-6 widget">
+					<div class="widget-body">
+						<p class="simplenav">
+							<a href="#">Acceuil</a> | 
+							<a href="#">Port Folio</a> |
+							<a href="#">Video</a> |
+							<a href="#">Activité sur place</a> |
+							<b><a href="#">Contact</a></b>
+						</p>
+					</div>
+				</div>
+
+				<div class="col-lg-6 widget">
+					<div class="widget-body">
+						<p class="text-right">
+							<p>© 2018 - <?php echo date('Y'); ?> __TRANS_footer_price__.</p>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</footer>	

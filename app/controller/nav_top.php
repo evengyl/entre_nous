@@ -8,12 +8,6 @@ Class nav_top extends base_module
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 
-		$nav_list = new stdClass();
-		$nav_list->table = "ma_ft_category";
-		$nav_list->var = "id, name_code, sub_categ, img, url";
-		$nav_list->order = "id";
-		$res_fx = $_app->sql->select($nav_list);
-
-		$this->get_html_tpl =  $this->assign_var('nav_top', $res_fx)->use_template('nav_top')->render_tpl();
+		$this->get_html_tpl =  $this->assign_var("_app", $_app)->use_template('nav_top')->render_tpl();
 	}
 }

@@ -8,6 +8,8 @@ Class name extends base_module
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 
+		//pour set le breadcrumb
+		$_app->navigation->set_breadcrumb(array("fr" => "texte fr", "en" => "texte en", "nl" => "texte nl"));
 
 		//use pour acceder a tout les query
 			$this->sql;

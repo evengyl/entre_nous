@@ -2,8 +2,8 @@
 @background_header: white;
 @background_navbar: #5F6066;
 @background_navbar_hover: #828389;
-@background_breadcrumb:#5F6066;
-@background_body: #9FC418;
+@background_breadcrumb:#cc0529;
+@background_body: #0687c5;
 
 @color_text : #d1d1d1;
 
@@ -79,11 +79,20 @@ table, tr, td, th, p, a, button, span, div, ul li{
     font-size:0.80rem !important;
 }
 
+
+@font-face {
+    font-family: Roboto;
+    src: url("../fonts/Roboto-Light.ttf");
+}
+
 body
 {
   background:@background_body;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
 }
+
+
+
 
 hr
 {
@@ -173,9 +182,7 @@ hr
 	padding-top:15px;
 	height:110px;	
   	background:@background_header;
-  	.time_server{
-  		color:@background_breadcrumb;
-  	}
+  	
   	.logo
 	{
 		padding-left:20px;
@@ -204,6 +211,10 @@ hr
 		.mini;
 		line-height:1.1rem;
 	}
+	.time_server{
+  		.mini;
+		line-height:1.1rem;
+  	}
 }
 
 

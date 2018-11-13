@@ -13,11 +13,12 @@ Class admin_test_orm extends base_module
 		/*
 		pour decrire l'action
 		orm est instanciée au début avec le min load, de la on appel une var qui n'existe pas dans orm, a la volée
-		de la je lui dis ok elle existe pas va la chercher a la valée et crée moi sa classe, 
+		de la je lui dis ok elle existe pas va la chercher a la volée et crée moi sa classe, 
 		ensuite je stock la class dans une pool pour utilisé plus tard au cas ou,
 		et je retourne la class, de la j'ai acces en enchaienemnt au methode de la class et de tout les parents lié a celle ci bien sur 
 		*/
-		$this->orm->unit_test->select();
+		$req_sql = "name, text, fonction where id = 1 order by id";
+		affiche_pre($this->orm->unit_test->select($req_sql));
 		//fin
 	}
 }

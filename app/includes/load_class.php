@@ -22,19 +22,24 @@ class Autoloader
             case "parse_sql":
             case "orm":
             case "modele_sql":
+            case "select_orm":
+            case "var_processing_select_orm":
                 require("Evengyl/core/".$class.".php");
                 break;
 
-            case strpos($class, "model_") !== false:
-                if(file_exists($base_dir."/app/core/modele_object/".$class.".php"))
-                    require($base_dir."/app/core/modele_object/".$class.".php");
+            case strpos($class, "modele_") !== false:
+                if(file_exists($base_dir."/app/modele/modele_object/".$class.".php"))
+                    require($base_dir."/app/modele/modele_object/".$class.".php");
                 break;
 
             case "router":
                 require($base_dir."/app/".$class.".php");
                 break;
 
+            case "_app":
+            case "app_init":                
             case "parser":
+            case "parser_translate":
             case "lang_select":
                 require($base_dir."/app/includes/".$class.".php");
                 break;
